@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float RunSpeed = 1f;
+    [SerializeField] private float jump_force = 10f;
 
     [Header("Components")]
     private Rigidbody2D _rigidbody;
@@ -22,9 +23,15 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody.velocity = new Vector2(RunSpeed, _rigidbody.velocity.y);
         _animator.SetFloat("Speed", _rigidbody.velocity.x);
+        if (Input.GetButtonDown("Jump"))
+        {
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
+            _rigidbody.velocity += Vector2.up * jump_force;
+        }
     }
 
     void FixedUpdate()
     {
+
     }
 }
